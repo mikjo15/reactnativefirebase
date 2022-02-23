@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, FlatList, Alert} from 'react-native';
 import {firebase} from '@react-native-firebase/database';
 
-import Header from './components/Header';
-import ListItem from './components/ListItem';
-import AddItem from './components/AddItem';
+import Header from './Header';
+import ListItem from './ListItem';
+import AddItem from './AddItem';
 
 // https://medium.com/geekculture/ill-be-building-a-todo-app-with-one-of-the-most-popular-web-application-frameworks-react-and-75ffe4b32dc4
 
@@ -15,7 +15,7 @@ const reference = firebase
   )
   .ref('/'); // Kunne blive ændret til /groceries, men ikke nødvendigt på
 
-const App = () => {
+const ShoppingList = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default ShoppingList;

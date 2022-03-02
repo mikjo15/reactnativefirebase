@@ -1,73 +1,52 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList, Alert} from 'react-native';
-import {firebase} from '@react-native-firebase/database';
+import {View, StyleSheet} from 'react-native';
+import auth from '@react-native-firebase/auth';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Header from './components/Header';
-import ListItem from './components/ListItem';
-import AddItem from './components/AddItem';
+import ShoppingList from './components/ShoopingList';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 
-// https://medium.com/geekculture/ill-be-building-a-todo-app-with-one-of-the-most-popular-web-application-frameworks-react-and-75ffe4b32dc4
-
-const reference = firebase
-  .app()
-  .database(
-    'https://fir-practice-e088c-default-rtdb.europe-west1.firebasedatabase.app/',
-  )
-  .ref('/'); // Kunne blive ændret til /groceries, men ikke nødvendigt på
+const AuthStack = createNativeStackNavigator();
+const AuthStackScreen = () => {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{title: 'Sign In', headerBackvisible: false}}
+      />
+      <AuthStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{title: 'Sign Up', headerBackVisible: false}}
+      />
+    </AuthStack.Navigator>
+  );
+};
 
 const App = () => {
-  const [items, setItems] = useState([]);
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState(null);
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
 
   useEffect(() => {
-    reference.on('value', snapshot => {
-      const groceryItems = snapshot.val();
-      const groceryList = [];
-
-      for (let id in groceryItems) {
-        const text = groceryItems[id];
-        const newItem = {id, text};
-        groceryList.push(newItem);
-      }
-
-      setItems(groceryList);
-    });
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
   }, []);
 
-  const deleteItem = id => {
-    groceryRef = reference.child(id);
-    groceryRef.remove();
-  };
-
-  const addItem = text => {
-    if (!text) {
-      Alert.alert(
-        'No item entered',
-        'Please enter an item when adding to your shopping list',
-        [
-          {
-            text: 'Understood',
-            style: 'cancel',
-          },
-        ],
-        {cancelable: true},
-      );
-    } else {
-      reference.push(text);
-    }
-  };
+  if (initializing) return null;
 
   return (
-    <View style={styles.container}>
-      <Header title="Shopping List" />
-      <AddItem addItem={addItem} />
-      <View style={styles.test}>{/*<Text>{testText}</Text>*/}</View>
-      <FlatList
-        data={items}
-        renderItem={({item}) => (
-          <ListItem item={item} deleteItem={deleteItem} />
-        )}
-      />
-    </View>
+    <NavigationContainer>
+      {!user ? <AuthStackScreen /> : <ShoppingList user={user} />}
+    </NavigationContainer>
   );
 };
 

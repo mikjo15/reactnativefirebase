@@ -1,6 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {firebase} from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 import Header from './Header';
 import ListItem from './ListItem';
@@ -8,15 +16,15 @@ import AddItem from './AddItem';
 
 // https://medium.com/geekculture/ill-be-building-a-todo-app-with-one-of-the-most-popular-web-application-frameworks-react-and-75ffe4b32dc4
 
-const reference = firebase
-  .app()
-  .database(
-    'https://fir-practice-e088c-default-rtdb.europe-west1.firebasedatabase.app/',
-  )
-  .ref('/'); // Kunne blive ændret til /groceries, men ikke nødvendigt på
-
-const ShoppingList = () => {
+const ShoppingList = ({user}) => {
   const [items, setItems] = useState([]);
+
+  const reference = firebase
+    .app()
+    .database(
+      'https://fir-practice-e088c-default-rtdb.europe-west1.firebasedatabase.app/',
+    )
+    .ref('/groceries/' + user.uid); // Kunne blive ændret til /groceries, men ikke nødvendigt på
 
   useEffect(() => {
     reference.on('value', snapshot => {
@@ -56,17 +64,26 @@ const ShoppingList = () => {
     }
   };
 
+  const logOut = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+  };
+
   return (
     <View style={styles.container}>
       <Header title="Shopping List" />
       <AddItem addItem={addItem} />
-      <View style={styles.test}>{/*<Text>{testText}</Text>*/}</View>
+      <View style={styles.test}></View>
       <FlatList
         data={items}
         renderItem={({item}) => (
           <ListItem item={item} deleteItem={deleteItem} />
         )}
       />
+      <TouchableOpacity style={styles.btn} onPress={() => logOut()}>
+        <Text style={styles.btnText}>Log Out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -74,6 +91,13 @@ const ShoppingList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  btn: {
+    backgroundColor: '#c2bad8',
+    borderRadius: 5,
+    padding: 9,
+    margin: 30,
+    alignItems: 'center',
   },
 });
 

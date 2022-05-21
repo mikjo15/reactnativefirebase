@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
   Text,
   SafeAreaView,
-  Button,
   TextInput,
   StyleSheet,
   TouchableOpacity,

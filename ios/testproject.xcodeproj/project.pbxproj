@@ -14,7 +14,7 @@
 		20DDE6C051AA7303453BF751 /* libPods-testproject-testprojectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D51D8ED36867D45D93360F /* libPods-testproject-testprojectTests.a */; };
 		54565DF19592663F4A59BE4A /* libPods-testproject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEA44B0088CB9851991420D /* libPods-testproject.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		ECC0098E27BD233F00E40A7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECC0098D27BD233F00E40A7B /* GoogleService-Info.plist */; };
+		ECE56C52283692D0003B6C4E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECE56C51283692D0003B6C4E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,7 @@
 		EC2AEC1627BD0CAE00318B26 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		EC2AEC1727BD0CAE00318B26 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
 		EC2AEC1827BD0CAE00318B26 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
-		ECC0098D27BD233F00E40A7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ECE56C51283692D0003B6C4E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FC3E6FD4FEB9E45B47FF11F1 /* Pods-testproject-testprojectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testproject-testprojectTests.debug.xcconfig"; path = "Target Support Files/Pods-testproject-testprojectTests/Pods-testproject-testprojectTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +104,7 @@
 		13B07FAE1A68108700A75B9A /* testproject */ = {
 			isa = PBXGroup;
 			children = (
+				ECE56C51283692D0003B6C4E /* GoogleService-Info.plist */,
 				EC2AEC0827BD0BC600318B26 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -146,7 +147,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				ECC0098D27BD233F00E40A7B /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* testproject */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* testprojectTests */,
@@ -287,8 +287,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				ECE56C52283692D0003B6C4E /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				ECC0098E27BD233F00E40A7B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
